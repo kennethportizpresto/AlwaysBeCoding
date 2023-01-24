@@ -8,8 +8,7 @@ ABC: Always Be Coding
 
 <h3> <ins> Objective </ins> </h3>
 This repository serves as a database for technical interview questions and fun practice problems. Some notable coding problems are pulled from 
-<a href="leetcode.com"/>LeetCode</a> and <a href ="https://www.geeksforgeeks.org"/>GeeksForGeeks</a>. Moreover, this repository serves as an experimental repository 
-as I tinker and immerse myself with Git and GitHub. In conclusion, this database is open source because I want the GitHub community to help me master Python, C++, C#, 
+<a href="https://leetcode.com"/>LeetCode</a> and <a href ="https://www.geeksforgeeks.org"/>GeeksForGeeks</a>. Moreover, this repository also serves as an experimental repository as I tinker and immerse myself with Git and GitHub. In conclusion, this database is open source because I want the GitHub community to help me master Python, C++, C#, 
 and Lua. Whether experienced or just starting, feel free to put up a PR. :) 
 
 <h3> Let's Get Started </h3>

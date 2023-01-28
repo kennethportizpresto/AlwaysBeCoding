@@ -1,4 +1,20 @@
 # Self pratice recursion
+
+# When to use recursion or iteration?
+# =====================================================================================================================================================================
+# Recursion is used when we need n amount of loops. When iteration becomes complicated. Although, we can recur on an iterative problem
+# an efficient iteration is faster and more space efficient than recursion. Moreover, when recursion is the same time complexity it sacrifices
+# space efficiency. Although, iteration is better for iterative problems recursion can improve readbility. An example where recursion makes sense
+# are trees. You can imagine a computer with n directories and for each n directories there are n amount of subdirectories so on and so forth. An
+# iterative approach would be complicated as we need to nest for loops n amount of times. The complexity of the problem scales exponentially. 
+# Therefore using recursion to split up the problem into smaller subproblems until finding a base case and backtracking in the stack to merge with other
+# subproblem answers to solve the big problem it becomes easier. We do not need to know n amount of loops we just need to know a basecase and how to break
+# up the problem and to ensure merging each solution is done correctly. 
+
+# Iteration is used if and only if the datastructure is simple and can be done with nested loops that are less than 4 in depth. Iteration can be used on 
+# a multidimensional array because we know the furthest for loop would be a depth of 2. A scenario where we may need a depth of 3 loops is potentially an outer loop
+# being a while loop where a condition needs to be met in order to stop cycling over the multidimensional array.
+# =====================================================================================================================================================================
 """ 
 Note To Self: With each recursive call we must check the base case to start merging lists... 
 adding the operand left or right of the list determines where the element is being 
@@ -174,6 +190,85 @@ def nestedRecur(n:int) -> int:
         return n - 10
     return nestedRecur(nestedRecur(n+11))
 
+# Indirect Recursion
+def indirectRecurA(n:int) -> None: 
+    if n > 0:
+        print(n, ' ')
+        indirectRecurB(n-1)
+
+def indirectRecurB(n:int) -> None: 
+    if n > 2:
+        print(n, ' ')
+        indirectRecurA(n-2)
+# GeeksforGeeks Recursion problems
+
+# Practice Question for Recursion | Set 1
+# Explain the functionality of the following functions.
+
+# Question 1
+"""
+    def fun1(x,y):
+        if (x == 0): 
+            return y
+        else:
+            return fun1(x-1, x+y)
+"""
+# This function returns the value of y. Because x decrements our y changes because y = x + y. We get our answer as we go down and return the y as we go back up the call stack. 
+
+# Question 2
+
+"""
+
+# Minimum index finder
+def minIndex(arr, s, e):
+     
+    sml = sys.maxsize
+    mindex = 0
+     
+    for i in range(s, e):
+        if (sml > arr[i]):
+            sml = arr[i]
+            mindex = i
+             
+    return mindex
+ 
+def fun2(arr, start_index, end_index):
+     
+    if (start_index >= end_index):
+        return
+         
+    min_index = minIndex(arr, start_index, end_index)
+    arr[start_index], arr[min_index] = arr[min_index], arr[start_index]
+    fun2(arr, start_index + 1, end_index)
+"""
+
+# We are sorting a list utilizing selection sort algorithm
+
+# Challenge for self can you make the iterative approach?
+def selectionSort(myList:list) -> None:
+    for i in range(len(myList)):
+        min_index = i
+        for j in range(len(myList)-1,i-1,-1):
+            if myList[min_index] > myList[j]:
+                min_index = j
+        myList[i], myList[min_index] = myList[min_index], myList[i]
+
+# Workthrough without seeing the solution
+def minIndex(myList:list, start:int, end:int) -> int:
+    minIndex = start 
+    for i in range(end, start-1, -1):
+        if myList[i] < myList[minIndex]:
+            minIndex = i 
+    return minIndex
+
+def selectionSortRecursion(myList:list, start:int, end:int) -> None:
+    if start >= end:
+        return 
+    else:
+        minIndx = minIndex(myList, start, end)
+        myList[start], myList[minIndx] = myList[minIndx], myList[start] 
+        selectionSortRecursion(myList, start + 1, end)
+
 if __name__== "__main__":
     try:
         assert count(9) == 9, "TestCase 1: Func-count -> Wrong count of recursion"
@@ -191,6 +286,15 @@ if __name__== "__main__":
         createBinaryTree()
         print("====== Continue on to our testcases ======")
         assert nestedRecur(95) == 91, "TestCase 12: Func-nestedRecur -> Fails to nest recursion"
+        indirectRecurA(50)
+        trueSkip_indirectRecur = [1,2,3,4,5,6,7]
+        
+        myList = [3,4,5,1,2,9,7]
+        selectionSort(myList)
+        assert myList == [1,2,3,4,5,7,9], "Test1: Func-selectionSort -> List is not ordered"
+        myList = [3,4,5,1,2,9,7]
+        selectionSortRecursion(myList, 0, len(myList)-1)
+        assert myList== [1,2,3,4,5,7,9], "Test2: Func-selectionSortRecursion -> List is not ordered"
 
         print("Process finished with exit code 0")
     except AssertionError as a:

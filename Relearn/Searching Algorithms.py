@@ -1,10 +1,8 @@
-# Searching and Sorting Algorithms
-
 # Searching Algorithms
 """
 There are many searching algorithms. I will only focus on linear search, 
 binary search, and Breadth First Search (BFS), 
-Depth First Search (DFS), and Backtracking, 
+Depth First Search (DFS).
 
 """
 
@@ -111,6 +109,7 @@ Conclusion: We only use interpolation if the linear datastructure is in order an
 
 # DFS
 """
+time = O(v+e) space = O(h), v is nodes and e is edges. h is the height of the tree with the longest branch.
 Use a hash set to find base case. Keeps track of nodes we visited. When creating a dfs generally you do a for loop and recur and have the base case inside the for loop. 
 When creating a graph ensure that there is one cycle. This is so we have a basecase. Every node must point to something which can be nothing or itself or other node. IT IS A KEY. 
 """
@@ -165,6 +164,7 @@ class Graph:
 
 # BFS
 """
+time = O(v+e) space = O(w) where w is biggest width we need for a level in the tree.
 To make BFS we need the start node. An empty list to keep track of seen values and a list to have queue.
 Append the start node to the seen and put it in the queue to be popped.
 We dequeue from the beginning and enque the edges for that key. When
@@ -192,9 +192,15 @@ class Graph_BFS:
             print(n, end = " ")
             for v in self.graph[n]:
                 if v not in visited_vertices:
+                    visited_vertices.append(v)
                     queue.append(v) 
 
 """
+To find the shortest distance essentially we are creating a queue that is a list of lists. 
+To find the shortest path the last element of the list must be the target.
+If it is not the target we use the last element as a key to see if that node has edges. 
+We must create a new path to add the previous nodes that were popped and add the corresponding edges.
+For example, queue = [[5,7], [5,6],[5,7,8],[5,7,9]] we found our target as 9 we ignoring and pop because we have seen 7,6,8 as the last element of the lists.
 """
 def bfs_1(graph, start, end):
     queue = []
@@ -214,7 +220,6 @@ def bfs_1(graph, start, end):
                 new_path.append(adjacent)
                 queue.append(new_path)
         
-
 if __name__== "__main__":
     try:
         assert linearSearch_Recur([1,2,3,4,5,6], 7) == -1, "TestCase 1: Func-linearSearch_Recur -> Failed did not return -1"
@@ -268,7 +273,10 @@ if __name__== "__main__":
             '2' : [],
             '8' : []}
         shortest_path = bfs_1(graph, '5', '8')
-        print(shortest_path)
+        assert shortest_path == ['5', '7', '8'], "TestCase 16: Func-bfs_l -> Failed to find shortest path BFS"
+        for i in shortest_path:
+            print(i, end = " -> ")
+        print()
 
         #assert shortestpath_unweighted == ['1','3','7'], "TestCase 15: Func-Graph_BFS -> Failed to find shortest path"
         print("Process finished with exit code 0")

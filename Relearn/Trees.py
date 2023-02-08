@@ -97,6 +97,11 @@ class node:
             return self.dfs_min_depth(root.left)+1
         return min(self.dfs_min_depth(root.left), self.dfs_min_depth(root.right))+1
     
+    def invertTree(self,root):
+        if root == None:
+            return 
+        root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
+        return root
 
 if __name__== "__main__":
     try:

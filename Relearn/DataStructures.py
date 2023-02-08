@@ -12,3 +12,5 @@ contain acyclic relationships.
 
 Primatives can store one value with a specific data type. While non-primatives can store many values of the same type or store many values with different datatypes. 
 """
+
+print("Hello World")
